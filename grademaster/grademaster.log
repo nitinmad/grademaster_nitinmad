@@ -1,0 +1,104 @@
+============================================================================== 
+grademaster v0.2.2 (2016-11-28)
+
+Johannes Hachmann (hachmann@buffalo.edu) with contributions by:
+   Mojtaba Haghighatlari (jobfile, Pandas dataframe) 
+
+============================================================================== 
+Thu May 03 18:59:54 2018
+
+This little program is designed to help manage course grades, make grade projections, etc.
+
+Invoked command line: 
+C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\grademaster\grademaster.py --data_file C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\tests\grade_dummy_file.csv
+
+Invoked options: 
+   data_file: C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\tests\grade_dummy_file.csv
+   error_file: grademaster.err
+   job_file: None
+   print_level: 2
+   requestmeeting: False
+   logfile: grademaster.log
+
+------------------------------------------------------------------------------ 
+Starting data acquisition...
+   ...reading in data...
+   ...cleaning data structure...
+   ...identify keys...
+   ...checking validity of data structure...
+   ...'email' missing in data structure!
+Aborting due to invalid data structure!
+============================================================================== 
+grademaster v0.2.2 (2016-11-28)
+
+Johannes Hachmann (hachmann@buffalo.edu) with contributions by:
+   Mojtaba Haghighatlari (jobfile, Pandas dataframe) 
+
+============================================================================== 
+Thu May 03 19:00:43 2018
+
+This little program is designed to help manage course grades, make grade projections, etc.
+
+Invoked command line: 
+C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\grademaster\grademaster.py --data_file C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\tests\grade_dummy_file_v2.csv
+
+Invoked options: 
+   data_file: C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\tests\grade_dummy_file_v2.csv
+   error_file: grademaster.err
+   job_file: None
+   print_level: 2
+   requestmeeting: False
+   logfile: grademaster.log
+
+------------------------------------------------------------------------------ 
+Starting data acquisition...
+   ...reading in data...
+   ...cleaning data structure...
+   ...identify keys...
+   ...checking validity of data structure...
+...data acquisition finished.
+------------------------------------------------------------------------------ 
+Summary of acquired data:
+   Number of students:  72
+   Number of homeworks: 10
+   Number of midterms:  2
+   Number of finals:    1
+------------------------------------------------------------------------------ 
+Starting calculation of grades and grade projections...
+============================================================================== 
+grademaster v0.2.2 (2016-11-28)
+
+Johannes Hachmann (hachmann@buffalo.edu) with contributions by:
+   Mojtaba Haghighatlari (jobfile, Pandas dataframe) 
+
+============================================================================== 
+Tue Feb 26 18:15:59 2019
+
+This little program is designed to help manage course grades, make grade projections, etc.
+
+Invoked command line: 
+C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\grademaster\grademaster.py --data_file C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\tests\grade_dummy_file_v2.csv
+
+Invoked options: 
+   data_file: C:\Users\j.hachmann\science\development\ce451_551_2018\grademaster\tests\grade_dummy_file_v2.csv
+   error_file: grademaster.err
+   job_file: None
+   print_level: 2
+   requestmeeting: False
+   logfile: grademaster.log
+
+------------------------------------------------------------------------------ 
+Starting data acquisition...
+   ...reading in data...
+   ...cleaning data structure...
+   ...identify keys...
+   ...checking validity of data structure...
+...data acquisition finished.
+------------------------------------------------------------------------------ 
+Summary of acquired data:
+   Number of students:  72
+   Number of homeworks: 10
+   Number of midterms:  2
+   Number of finals:    1
+------------------------------------------------------------------------------ 
+Starting calculation of grades and grade projections...
