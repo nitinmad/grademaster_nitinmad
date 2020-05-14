@@ -7,19 +7,19 @@ _AUTHOR = "Johannes Hachmann (jh@chemistry.harvard.edu)"
 _DESCRIPTION = "This is the a library for general purpose functions."
 
 # Version history timeline:
-# v0.001 (2007-??-??) 
-# v0.002 (2010-02-16): added tot_exec_time_str 
-# v0.100 (2010-07-25,08-06): complete overhaul 
-# v0.101 (2010-08-10): added intermed_exec_timing 
-# v0.200 (2010-08-16): added std_datetime_str 
-# v0.300 (2010-08-31): added chk_rmdir 
+# v0.001 (2007-??-??)
+# v0.002 (2010-02-16): added tot_exec_time_str
+# v0.100 (2010-07-25,08-06): complete overhaul
+# v0.101 (2010-08-10): added intermed_exec_timing
+# v0.200 (2010-08-16): added std_datetime_str
+# v0.300 (2010-08-31): added chk_rmdir
 # v1.4.0 (2010-10-25): added wc_all; changed version format
 # v1.5.0 (2010-10-31): added mksubdir_struct; modified chk_mkdir
 # v1.6.0 (2010-11-01): added bin_file_format_change
 # v1.7.0 (2011-04-04): added isFloat
-# v1.7.1 (2011-04-04): modified isFloat, such that NaN, Nan, nan are excluded 
-# v1.8.0 (2011-07-06): added target_dir_struct 
-# v1.9.0 (2011-09-07): added line_count 
+# v1.7.1 (2011-04-04): modified isFloat, such that NaN, Nan, nan are excluded
+# v1.8.0 (2011-07-06): added target_dir_struct
+# v1.9.0 (2011-09-07): added line_count
 # v1.10.0 (2011-10-07): improve print_invoked_opts
 # v1.10.1 (2011-10-13): improve formatting of print_invoked_opts
 # v1.11.0 (2011-11-30): improve formatting of print_invoked_opts
@@ -66,13 +66,13 @@ def banner(logfile, SCRIPT_NAME, SCRIPT_VERSION, REVISION_DATE, AUTHOR, DESCRIPT
     str.append(AUTHOR)
     str.append("============================================================================== ")
     str.append(time.ctime())
-    str.append("")    
+    str.append("")
     str.append(DESCRIPTION)
     str.append("")
 
-    print 
+    print()
     for line in str:
-        print line
+        print(line)
         logfile.write(line + '\n')
 
 ##################################################################################################
@@ -80,52 +80,52 @@ def banner(logfile, SCRIPT_NAME, SCRIPT_VERSION, REVISION_DATE, AUTHOR, DESCRIPT
 def print_invoked_opts(logfile,opts,commline_list=[]):
     """(print_invoked_opts):
         Prints the invoked options to stdout and the logfile.
-    """    
+    """
     if len(commline_list) != 0:
         tmp_str = "Invoked command line: "
-        print tmp_str
+        print(tmp_str)
         logfile.write(tmp_str + '\n')
         tmp_str = ' '.join(commline_list)
-        print tmp_str
-        print 
+        print(tmp_str)
+        print()
         logfile.write(tmp_str + '\n\n')
-        
+
     tmp_str = "Invoked options: "
-    print tmp_str
+    print(tmp_str)
     logfile.write(tmp_str + '\n')
     for key, value in opts.__dict__.items():
-        tmp_str = '   ' + key + ': ' + str(value)   
-        print tmp_str    
+        tmp_str = '   ' + key + ': ' + str(value)
+        print(tmp_str)
         logfile.write(tmp_str + '\n')
-    print
+    print()
     logfile.write('\n')
 
 ##################################################################################################
 
 def wc_dir(dir):
     """(wc_dir):
-        Returns the number of dirs in a given dir via ls -1d | wc -l. 
+        Returns the number of dirs in a given dir via ls -1d | wc -l.
         Not that this becomes a rather expensive function call when dir contains many subdirs.
-    """    
+    """
 #TODO: take care of error for empty dirs
     tmp_str = "ls -1d " + dir + "/*/ | wc -l"
-    # this is a quite new python feature and may is only available in 2.6 or so 
+    # this is a quite new python feature and may is only available in 2.6 or so
     # n = subprocess.getoutput(tmp_str)
-    # ... and for older python versions     
+    # ... and for older python versions
     return int(subprocess.Popen(tmp_str,shell=True,stdout=subprocess.PIPE).stdout.read())
 
 ##################################################################################################
 
 def wc_all(dir):
     """(wc_all):
-        Returns the number of files and dirs in a given dir via ls -1 | wc -l. 
+        Returns the number of files and dirs in a given dir via ls -1 | wc -l.
         Not that this becomes a rather expensive function call when dir contains many entries.
-    """    
+    """
 #TODO: take care of error for empty dirs
     tmp_str = "ls -1 " + dir + " | wc -l"
-    # this is a quite new python feature and may is only available in 2.6 or so 
+    # this is a quite new python feature and may is only available in 2.6 or so
     # n = subprocess.getoutput(tmp_str)
-    # ... and for older python versions     
+    # ... and for older python versions
     return int(subprocess.Popen(tmp_str,shell=True,stdout=subprocess.PIPE).stdout.read())
 
 ##################################################################################################
@@ -133,7 +133,7 @@ def wc_all(dir):
 def line_count(file_namestr):
     """(line_count):
         Returns the number of lines in a file.
-    """    
+    """
     if os.path.getsize(file_namestr) == 0:
         return 0
     with open(file_namestr) as file:
@@ -147,25 +147,25 @@ def mksubdir_struct(dir,max_n_entries=10000,run_always=False):
     """(mksubdir_struct):
         This function takes the content of a dir and makes numbered substructure dirs with each n_entries of the original dir.
         The motivation was to have a function with limits the number of entries in a directory to a certain threshold
-        (e.g., 10,000 or 30,000) in order to avoid performance issues with the OS/filesystem. 
+        (e.g., 10,000 or 30,000) in order to avoid performance issues with the OS/filesystem.
     """
     entry_list = []
     for entry in os.listdir(dir):
         entry_list.append(entry)
     entry_list.sort()
-    
+
     n_entries = len(entry_list)
-    
+
     if n_entries >= max_n_entries or run_always:
         subdir_counter = 0
         subdir_entry_counter = 0
         subdir_pathstr = dir + "/%05d"  %(subdir_counter)
-        
+
         if chk_mkdir(subdir_pathstr,True) == False:
             sys.exit("Naming conflict!")
-        
+
         for entry in entry_list:
-            tmp_str = "mv " + entry + " " + subdir_pathstr + "/." 
+            tmp_str = "mv " + entry + " " + subdir_pathstr + "/."
             os.system(tmp_str)
             subdir_entry_counter +=1
             if subdir_entry_counter >= max_n_entries:
@@ -174,7 +174,7 @@ def mksubdir_struct(dir,max_n_entries=10000,run_always=False):
                 subdir_pathstr = dir + "/%05d"  %(subdir_counter)
                 if chk_mkdir(subdir_pathstr,True) == False:
                     sys.exit("Naming conflict!")
-                
+
 ##################################################################################################
 
 def chk_mkdir(dir,warning=False):
@@ -222,7 +222,7 @@ def chk_rmfile(file_namestr):
     file.close()
     if len(test_str) == 0:
         os.remove(file_namestr)
-    
+
 ##################################################################################################
 
 def target_dir_struct(target_dir_path, maxitems = 10000, digits=5):
@@ -241,7 +241,7 @@ def target_dir_struct(target_dir_path, maxitems = 10000, digits=5):
     if len(target_subdir_list)==0:
         target_subdir = 0   # this is the highest folder
         target_subdir_n = 0 # this is the number of items in it
-    # 2b) if there are subfolders present    
+    # 2b) if there are subfolders present
     else:
         target_subdir_list.sort()
         target_subdir = int(target_subdir_list[-1]) # pick the highest folder
@@ -254,7 +254,7 @@ def target_dir_struct(target_dir_path, maxitems = 10000, digits=5):
 #    target_subdir_pathstr = target_dir_path + "/%05d"  %(target_subdir)
     chk_mkdir(target_subdir_pathstr)
     return target_subdir, target_subdir_n, target_subdir_pathstr
-    
+
 ##################################################################################################
 
 def mv2subdir_struct(source_dir_pathstr, target_subdir, target_subdir_n, target_subdir_pathstr, maxitems = 10000):
@@ -262,7 +262,7 @@ def mv2subdir_struct(source_dir_pathstr, target_subdir, target_subdir_n, target_
         This function moves a source folder into a target subdir structure and updates it.
     """
     # move
-    tmp_str = 'mv ' + source_dir_pathstr + ' ' + target_subdir_pathstr + '/. ' 
+    tmp_str = 'mv ' + source_dir_pathstr + ' ' + target_subdir_pathstr + '/. '
     os.system(tmp_str)
     target_subdir_n += 1
 
@@ -270,14 +270,14 @@ def mv2subdir_struct(source_dir_pathstr, target_subdir, target_subdir_n, target_
     if target_subdir_n >= maxitems:     # this limit is more important for folders rather than files (in this case tarballs); but we do it anyways
         target_subdir += 1
         target_subdir_n = 0
-        
+
         # make new target subdir
         tmp_str = target_subdir_pathstr.split('/')[-1]
         digits = len(tmp_str)
         target_subdir_pathstr = target_subdir_pathstr[:-digits] + '{num:{fill}{width}}'.format(num=target_subdir, fill='0', width=digits)
         chk_mkdir(target_subdir_pathstr)
     return target_subdir, target_subdir_n, target_subdir_pathstr
-    
+
 ##################################################################################################
 
 def std_datetime_str(mode='datetime'):
@@ -321,10 +321,10 @@ def intermed_exec_timing(time_start,intermed_n,total_n,n_str="n"):
     proj_end_time = int(round(tmp_time + proj_rest_sec))
     tmp_str = "   Current speed: %0.2f " %(n_per_hour)
     tmp_str += n_str + "'s/hour; current pace: %0.3f " %(sec_per_n)
-    tmp_str += "sec/" + n_str + "\n" 
+    tmp_str += "sec/" + n_str + "\n"
 #    tmp_str +="   Projected remaining time: %0.2fs (%dh %dm %0.2fs) " %(proj_rest_sec, proj_rest_sec/3600, (proj_rest_sec%3600)/60,(proj_rest_sec%3600)%60)
     tmp_str +="   Projected remaining time: %0.2fs (%dh %dm %0.2fs) \n" %(proj_rest_sec, proj_rest_sec/3600, (proj_rest_sec%3600)/60,(proj_rest_sec%3600)%60)
-    tmp_str +="   Projected end time: " + time.ctime(proj_end_time) 
+    tmp_str +="   Projected end time: " + time.ctime(proj_end_time)
     return tmp_str
 
 ##################################################################################################
@@ -337,17 +337,17 @@ def intermed_process_timing(time_start,process_n,intermed_n,total_n,n_str="n"):
     tmp_exec_time = tmp_time-time_start
     if process_n == 0:
         return ''
-    
+
     sec_per_n = 1.0*tmp_exec_time/process_n
     n_per_hour = 3600.0/sec_per_n
     proj_rest_sec = sec_per_n*(total_n-intermed_n)
     proj_end_time = int(round(tmp_time + proj_rest_sec))
     tmp_str = "   Current speed: %0.2f " %(n_per_hour)
     tmp_str += n_str + "'s/hour; current pace: %0.3f " %(sec_per_n)
-    tmp_str += "sec/" + n_str + "\n" 
+    tmp_str += "sec/" + n_str + "\n"
 #    tmp_str +="   Projected remaining time: %0.2fs (%dh %dm %0.2fs) " %(proj_rest_sec, proj_rest_sec/3600, (proj_rest_sec%3600)/60,(proj_rest_sec%3600)%60)
     tmp_str +="   Projected remaining time: %0.2fs (%dh %dm %0.2fs) \n" %(proj_rest_sec, proj_rest_sec/3600, (proj_rest_sec%3600)/60,(proj_rest_sec%3600)%60)
-    tmp_str +="   Projected end time: " + time.ctime(proj_end_time) 
+    tmp_str +="   Projected end time: " + time.ctime(proj_end_time)
     return tmp_str
 
 ##################################################################################################
@@ -358,7 +358,7 @@ def timeit(func):
     """
     def timed_func(*args, **kwargs):
         t1 = time.time()
-        
+
         try:
             func(*args, **kwargs)
         finally:
@@ -420,7 +420,7 @@ def bin_file_format_change(infile_namestr,outfile_namestr,mode):
     infile.close()
 # TODO: change binary format
 # TODO: this needs to be a binary write
-    outfile = open(outfile_namestr,'wb',0)    
+    outfile = open(outfile_namestr,'wb',0)
     if mode == 'sp2dp':
         in_bin = fromstring(in_bin_str,float32)
         sys.exit()
@@ -430,7 +430,7 @@ def bin_file_format_change(infile_namestr,outfile_namestr,mode):
     else:
         sys.exit("Unknown binary format conversion mode.")
 # TODO: make new file and dump
-    
+
     outfile.close()
 
 ###################################################################################################
@@ -481,7 +481,7 @@ def filelinecount(filename):
 def revdict_lookup(dict,lookup_val):
     """(revdict_lookup):
         Performs a reverse dictionary lookup. Careful: only returns first match, but there may be others.
-    """    
+    """
     key = (key for key,value in dict.items() if value==lookup_val).next()
     return key
 
@@ -492,7 +492,7 @@ def queryset_iterator(queryset, chunksize=1000, reverse=False, id_only=False, va
     """(queryset_iterator):
         Django incremental queryset iterator.
         Found on: http://www.poeschko.com/2012/02/memory-efficient-django-queries/
-    """    
+    """
     ordering = '-' if reverse else ''
     queryset = queryset.order_by(ordering + 'pk')
     last_pk = None
@@ -505,13 +505,13 @@ def queryset_iterator(queryset, chunksize=1000, reverse=False, id_only=False, va
             chunk = chunk.filter(**{'pk__' + func: last_pk})
         chunk = chunk[:chunksize]
         if id_only:
-            chunk = chunk.values('pk')            
+            chunk = chunk.values('pk')
         row = None
         for row in chunk:
             yield row
         if row is not None:
             if id_only or values:
-                last_pk = row['pk']                
+                last_pk = row['pk']
             else:
                 last_pk = row.pk
             new_items = True
